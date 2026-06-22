@@ -26,7 +26,14 @@ public class RoastService {
                 SCORE: <number from 1-10>
 
                 ROAST:
-                <funny roast with useful feedback at the end>
+                <funny savage roast, 3-4 sentences>
+
+                SUGGESTIONS:
+                • <specific actionable improvement>
+                • <specific actionable improvement>
+                • <specific actionable improvement>
+                • <specific actionable improvement>
+                • <specific actionable improvement>
 
                 Resume:
                 """ + resumeText;
@@ -66,6 +73,7 @@ public class RoastService {
 
             String score = "5";
             String roast = text;
+            String suggestions = "";
 
             if (text.contains("SCORE:")) {
 
@@ -83,15 +91,20 @@ public class RoastService {
                 }
 
                 int roastIndex = text.indexOf("ROAST:");
+                int suggestIndex = text.indexOf("SUGGESTIONS:");
 
-                if (roastIndex != -1) {
+                if (roastIndex != -1 && suggestIndex != -1) {
+                    roast = text.substring(roastIndex + 6, suggestIndex).trim();
+                    suggestions = text.substring(suggestIndex + 12).trim();
+                } else if (roastIndex != -1) {
                     roast = text.substring(roastIndex + 6).trim();
                 }
             }
 
             return Map.of(
                     "score", score,
-                    "roast", roast
+                    "roast", roast,
+                    "suggestions", suggestions
             );
 
         } catch (Exception e) {
@@ -100,7 +113,8 @@ public class RoastService {
 
             return Map.of(
                     "score", "0",
-                    "roast", "Error: " + e.getMessage()
+                    "roast", "Error: " + e.getMessage(),
+                    "suggestions", ""
             );
         }
     }
