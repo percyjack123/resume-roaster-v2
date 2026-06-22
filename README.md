@@ -56,7 +56,7 @@ Users can upload their resumes (PDF), and the system extracts content, analyzes 
 
 ## 🔗 Live Demo
 
-https://resume-roaster-git-main-sahithi-jalapartis-projects.vercel.app/
+https://resume-roaster-v2.vercel.app/
 
 ---
 
